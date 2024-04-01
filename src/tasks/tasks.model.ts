@@ -1,4 +1,12 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { ColumnBoard } from 'src/columns/columns.model';
 
 interface TaskCreateField {
   title: string;
@@ -23,4 +31,14 @@ export class Task extends Model<Task, TaskCreateField> {
 
   @Column({ type: DataType.BOOLEAN, defaultValue: false })
   isFinished: boolean;
+
+  @Column({ type: DataType.STRING })
+  test: string;
+
+  @ForeignKey(() => ColumnBoard)
+  @Column({ type: DataType.INTEGER })
+  columnId: number;
+
+  @BelongsTo(() => ColumnBoard)
+  columnBoard: ColumnBoard;
 }

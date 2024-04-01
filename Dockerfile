@@ -2,10 +2,12 @@ FROM node
 
 WORKDIR /app
 
-COPY . .
+COPY package*.json ./
 
 RUN npm install
 
-EXPOSE 3000
+COPY . .
 
-CMD ["nest", "start"]
+COPY ./dist ./dist
+
+CMD ["npm", "start"]
